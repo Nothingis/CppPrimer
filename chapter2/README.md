@@ -1,13 +1,13 @@
-# Exercise 2.2 
+## Exercise 2.2 
 
 >융자 상환금을 계산할 때 이자, 원금, 상환금에 사용할 타입을 선택하고 각각에 대해 설명한다.
  
 
-# Exercise 2.3 
+## Exercise 2.3 
 >다음 코드에서 출력 결과는 무엇인가?
  
 
-# Exercise 2.5 
+## Exercise 2.5 
 >다음 상수 각각의 타입과 네 가지 예제별로 상수의 차이점을 설명한다.
 
 (a) 'a', L'a', "a", L"a"
@@ -16,14 +16,14 @@
 (d) 10, 10u, 10., 10e-2
  
 
-# Exercise 2.6 
+## Exercise 2.6 
 >다음 정의에서 차이가 있으면 무엇인지 설명한다.
 int month  9, day  7;
 int month  09, day  07;
 
  
 
-# Exercise 2.7 
+## Exercise 2.7 
 >다음 상수가 나타애는 값이 무엇이고, 각각의 타입이 무엇인지 설명한다.
 (a) "Who goes with F\145rgus?\012"
 (b) 3.14e1L
