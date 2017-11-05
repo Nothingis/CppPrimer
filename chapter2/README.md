@@ -85,3 +85,153 @@ std::cout << u - i << std::endl;
 
 (d): 3.14    long double
 
+## Exeercise 2.9
+> 다음 정의를 설명하고 올바르지 않으면 무엇이 잘못되었는지 설명하고 고친다.
+- (a) std::cin >> int input_value;
+- (b) int i = { 3.14 };
+- (c) double salary = wage = 9999.99;
+- (d) int i = 3.14;
+
+(a): 정의는 따로한다.
+```cpp
+int input_value = 0;
+std::cin >> input_value;
+```
+(b): c++11 이전 버전에서는 값이 잘려나가는 경고가 발생, c++11 버전에서는 에러가 발생.
+```cpp
+double i = { 3.14 };
+```
+(c): wage를 이전에 선언했다면 괜찮지만, 그렇지 않다면 에러.
+```cpp
+double wage;
+double salary = wage = 9999.99;
+```
+(d): 에러는 없지만 값이 잘려나감
+```cpp
+double i = 3.14;
+```
+
+## Exercise 2.10
+> 다음 변수 각각에 대해, 초기 값이 있으면 무엇인지 설명한다.
+```cpp
+std::string global_str;
+int global_int;
+int main()
+{
+		int local_int;
+		std::string local_str;
+}
+```
+
+global_str과 global_int는 전역 변수이기 때문에 0으로 초기화 된다.
+local_int는 내장 타입이고, 지역 변수이므로 초기화 되지 않는다.
+local_str은 지역 변수이지만, 클래스로 정의된 객체이므로 empty 문자열로 초기화 된다.
+
+## Exercise 2.11
+> 다음 각각이 선언인지 정의인지 설명한다.
+- (a) extern int ix = 1024;
+- (b) int iy;
+- (c) extern int iz;
+
+(a) 정의, (b) 정의, (c) 선언
+
+## Exercise 2.12
+> 다음 이름 중 유효하지 않은 것이 있으면 무엇인지 찾는다.
+- (a) int double = 3.14;
+- (b) int _;
+- (c) int catch-22;
+- (d) int 1_or_2 = 1;
+- (e) double Double = 3.14;
+
+a, c, d는 불가.
+
+## Exercise 2.13
+> 다음 프로그램에서 j 값은 무엇인가?
+```cpp
+int i = 42;
+
+int main()
+{
+		int i = 100;
+		int j = i;
+}
+```
+
+내부 유효 범위를 먼저 읽어서 j의 초기화에 사용 즉, j = 100
+
+## Exercise 2.14
+> 다음 프로그램은 올바른가? 옳다면 출력 값은 무엇인가?
+```cpp
+int i = 100, sum = 0;
+for (int i = 0; i != 10; ++i)
+	sum += i;
+std::cout << i << " " << sum <, std::endl;
+```
+
+출력:
+
+100 45
+
+## Exercise 2.15
+> 다음 정의 중 잘못된 것이 있다면 어느 것이고 왜 그런지 설명한다.
+- (a) int ival = 1.01;
+- (b) int &rvla1 = 1.01;
+- (c) int &rval2 = ival;
+- (d) int &rval3;
+
+## Exercise 2.16
+> 다음 대입문 중 잘못된 것이 있으면 어느 것인지 찾고, 올바른 것이 있으면 무엇을 하는지 설명한다.
+```cpp
+int i = 0, &r1 = i; double d = 0, &r2 = d;
+```
+- (a) r2 = 3.14159;
+- (b) r2 = r1;
+- (c) i = r2;
+- (d) r1 = d;
+
+
+## Exercise 2.17
+> 다음 코드에서 출력하느 내용은 무엇인가?
+```cpp
+int i,&ri = i;
+i = 5; ri = 10;
+std::cout << i << " " << ri << std::endl;
+```
+
+## Exercise 2.19
+> 포인터와 참조자 사이에 핵심적인 차이를 설명한다.
+
+
+## Exercise 2.20
+> 다음 프로그램에서 하는 일은 무엇인가?
+```cpp
+int i = 42;
+int *p1 = &i;
+*p1 = *p1 * *p1;
+```
+
+## Exercise 2.21
+> 다음 각 정의에 대해 설명하고 올바르지 않은 것이 있으면 이유를 설명한다.
+```cpp
+int i = 0;
+```
+- (a) double* dp = &i;
+- (b) int *ip = i;
+- (c) int *p = &i;
+
+
+## Exercise 2.22
+> p가 int에 대한 포인터라고 가정하고 다음 코드를 설명한다.
+```cpp
+if (p) //...
+if (*p) //...
+```
+
+## Exercise 2.23
+> 포인터 p가 있다고 할 때, p로 유효한 객체를 가리키고 있는지 결정할 수 있는가? 그럴 수 있다면 어떻게 그럴 수 있는지, 없다면 왜 그런지 설명한다.
+
+## Exercise 2.24
+> 왜 p에 대한 초기화는 옳고 lp에 대해서는 그렇지 않은지 설명한다.
+```cpp
+int i = 42; void *p = &i; long *lp = &i;
+```
