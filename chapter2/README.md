@@ -45,6 +45,8 @@ std::cout << u - i << std::endl;
 ## Exercise 2.4
 > 예상이 맞는지 확인하는 프로그램을 만든다. 예상이 맞지 않으면 문제를 이해할 때까지 이 절에서 배운 내용을 다시 학습한다.
 
+코드는 [여기](ex2_4.cpp)
+
 ## Exercise 2.5 
 > 다음 상수 각각의 타입과 네 가지 예제별로 상수의 차이점을 설명한다.
 
@@ -89,6 +91,8 @@ std::cout << u - i << std::endl;
 
 ## Exercise 2.8
 > 확장 문자열을 사용해 2M과 줄바꿈 문자를 출력하는 프로그램을 만든다. 이 프로그램을 수정해 2, 탭, M, 줄바꿈 문자를 출력하게 한다.
+
+코드는 [여기](ex2_8.cpp)
 
 ## Exeercise 2.9
 > 다음 정의를 설명하고 올바르지 않으면 무엇이 잘못되었는지 설명하고 고친다.
@@ -269,12 +273,21 @@ void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므
 - (b) int i, *ip = 0;
 - (c) int * ip, ip2;
 
+(a) ip: int 포인터, i: int, r: i 참조자
+(b) i: int, ip: int 포인터 값은 nullptr
+(c) ip: int 포인터, ip2: int
+
 ## Exercise 2.26
 > 다음에서 옳은 것을 찾고, 옳지 않은 것은 이유를 설명한다.
 - (a) const int buf;
 - (b) int cnt = 0;
 - (c) const int sz = cnt;
 - (d) ++cnt; ++sz;
+
+(a) 오류. 초기화되어야 한다.
+(b) 정상
+(c) 정상
+(d) ++cnt는 정상. ++sz는 const 객체에 쓰기를 시도했다.
 
 ## Exercise 2.27
 > 다음 초기화 중 옳은 것을 찾고 이유를 설명한다.
@@ -287,6 +300,14 @@ void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므
 - (g) const int i2 = i, &r = i;
 
 
+(a) r은 객체를 가르켜야 한다.
+(b) 정상
+(c) 정상
+(d) 정상
+(e) 정상
+(f) 오류. r2는 참조자이므로 const가 될 수 없다.
+(g) 정상
+
 ## Exercise 2.28
 > 다음 정의를 설명하고 옳지 않은 것을 찾는다.
 - (a) int i, *const cp;
@@ -294,6 +315,12 @@ void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므
 - (c) const int ic, &r = ic;
 - (d) const int *const p3;
 - (e) const int *p;
+
+(a) cp는 초기화 되어야 한다.
+(b) p2는 초기화 되어야 한다.
+(c) ic는 초기화 되어야 한다.
+(d) p3는 초기화 되어야 한다.
+(e) 정상.
 
 ## Exercise 2.29
 > 앞 연습문제에 있는 변수를 사용해 다음 대입 중 옳은 것을 찾고 이유를 설명한다.
@@ -304,6 +331,13 @@ void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므
 - (e) p2 = p1;
 - (f) ic = *p3;
 
+(a) 정상
+(b) p3는 const int에 대한 포인터이다.
+(c) ic는 const int이다.
+(d) p3는 const 포인터이다.
+(e) p2는 const 포인터이다.
+(f) ic는 const int이다.
+
 ## Exercise 2.30 
 > 다음 각 선언에서, 객체의 상위나 하위 const가 있는지 찾는다.
 ```cpp
@@ -312,6 +346,7 @@ int v1 = v2;
 int *p1 = &v1, &r1 = v1;
 const int *p2 = &v2, *const p3 = &i, &r2 = v2;
 ```
+v2는 상위 const, p2는 하위 레벨 const, p3는 상위 하위 const, r2는 하위 const이다.
 
 ## Exercise 2.31
 > 앞 연습문제에 있는 선언에 대해 다음 대입이 옳은지 확인한다. 각 경우에 상위 또는 하위 const가 어떻게 적용되는지 설명한다.
@@ -322,11 +357,20 @@ p2 = p1;
 p1 = p3;
 p2 = p3;
 ```
+정상
+오류, p2는 하위 const이지만, p1은 아니다.
+정상
+오류. p3는 하위 const이지만, p1은 아니다.
+정상.
 
 ## Exercise 2.32 
 > 다음 코드가 옳은지 여부를 확인하고, 옳지 않다면 어떻게 바로 잡을 수 있을지 설명한다.
 ```cpp 
 int null = 0, *p = null;
+```
+
+int null = 0, *p = nullptr;
+
 
 ## Exercise 2.33
 > 이 절에서 예로 든 변수 정의를 사용해 다은 각 대입은 어떻게 되는지 설명한다.
@@ -336,13 +380,20 @@ b = 42;
 c = 42;
 d = 42;
 e = 42;
-f = 42;
 g = 42;
 ```
+
+a 정상.
+b 정상.
+c 정상.
+d 오류. d는 int* 이다.
+e 오류. e는 const int* 이다.
+g 오류. g는 const int& 이다. (바꿀 수 없다)
 
 ## Exercise 2.34
 > 앞 연습문제에 있는 변수와 대입을 사용해 프로그랩을 만든다. 대입 앞뒤에서 각 변수를 출력해 앞 연습문제에서 예상한 내용이 맞는지 확인한다. 맞지 않으면 뭐가 잘못됐는지 정확히 알 때까지 예제를 학습한다.
 
+코드는 [여기](ex2_34.cpp)
 
 ## Exercise 2.35
 > 다음 각 정의에서 추론한 타입을 설명한다. 타입을 모두 설명한 후에는 프로그램을 만들어 맞는지 확인한다.
@@ -354,6 +405,10 @@ auto *p = &i;
 const auto j2 = i, &k2 = i;
 ```
 
+j: int, k: const int&, p: const int*, j2: const int&
+
+코드는 [여기](ex2_35.cpp)
+
 ## Exercise 2.36
 > 다음 각 코드에서 각 변수의 타입이 무엇인지, 코드를 마쳤을 때 각 변수이 값은 무엇인지 설명한다.
 ```cpp
@@ -363,6 +418,8 @@ decltype((b)) d = a;
 ++c;
 ++d;
 ```
+c: int, d: int&,
+a,b,c,d = 4
 
 ## Exercise 2.37
 > 대입은 참조자 타입을 반환하는 표현식의 한 예이며 그 타입은 왼쪽 피연산자의 타입에 대한 참조자이다. 즉 i가 int라면 표현식 i = x의 타입은 int&이다. 그렇다면 다음 각 코드에서 각 변수의 타입과 값은 무엇이겠는가?
@@ -372,8 +429,14 @@ decltype(a) c = a;
 decltype(a = b) d = a;
 ```
 
+c: int, d: int&
+a=3, b=4, c=3, d=3
+
 ## Exercise 2.38
 > decltype과 auto 사이에 타입 추론 방법의 차이를 설명한다. auto와 decltype을 사용해 같은 타입으로 추론하는 예와 다른 타입으로 추론하는 예를 만든다.
+
+auto는 객체를 실제로 사용하지만, decltype은 참조자를 사용한다. 
+decltype은 추론이 대상 표현식의 형식에 의존한다.
 
 ## Exercise 2.39
 > 다음 프로그램을 컴파일해 클래스 정의에 세미콜론을 빠뜨리면 어떻게 되는지 확인하고, 후에 참고할 수 있도록 메시지를 잘 기억한다.
@@ -384,14 +447,26 @@ int main()
 	return 0;
 }
 ```
+Error message:[Error]expected';' after struct definition
 
 ## Exercise 2.40
 > Sales_data 클래스를 직접 만든다.
 
+struct Sales_data
+{
+	std:string bookNo;
+	std:string bookName;
+	unsigned units_sold = 0;
+	double revenue = 0.0;
+	double price = 0.0;
+};
 
 ## Exercise 2.41
 > 직접 만든 Sales_data 클래스를 사용해 1.5.1절, 1.5.2절, 1.6절  연습문제에서 만든 프로그램을 다시 만든다. 지금은 Sales_data 클래스를 main 함수와 같은 파일에 정의해야 한다.
 
+TODO
 
 ## Exercise 2.42
 > Sales_data.h 헤더를 직접 만들고 이를 사용해 2.6.2절 연습문제에서 만든 프로그램을 다시 만든다.
+
+TODO
