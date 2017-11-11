@@ -488,7 +488,7 @@ Error message:[Error]expected';' after struct definition
 
 ## Exercise 2.40
 > Sales_data 클래스를 직접 만든다.
-
+```cpp
 struct Sales_data
 {
 	std:string bookNo;
@@ -497,6 +497,7 @@ struct Sales_data
 	double revenue = 0.0;
 	double price = 0.0;
 };
+```
 
 ## Exercise 2.41
 > 직접 만든 Sales_data 클래스를 사용해 1.5.1절, 1.5.2절, 1.6절  연습문제에서 만든 프로그램을 다시 만든다. 지금은 Sales_data 클래스를 main 함수와 같은 파일에 정의해야 한다.
