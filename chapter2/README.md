@@ -42,6 +42,8 @@ std::cout << u - i << std::endl;
 0
 0
 ```
+## Exercise 2.4
+> 예상이 맞는지 확인하는 프로그램을 만든다. 예상이 맞지 않으면 문제를 이해할 때까지 이 절에서 배운 내용을 다시 학습한다.
 
 ## Exercise 2.5 
 > 다음 상수 각각의 타입과 네 가지 예제별로 상수의 차이점을 설명한다.
@@ -84,6 +86,9 @@ std::cout << u - i << std::endl;
 (c): 오류. 정수에 접미어 f는 불가
 
 (d): 3.14    long double
+
+## Exercise 2.8
+> 확장 문자열을 사용해 2M과 줄바꿈 문자를 출력하는 프로그램을 만든다. 이 프로그램을 수정해 2, 탭, M, 줄바꿈 문자를 출력하게 한다.
 
 ## Exeercise 2.9
 > 다음 정의를 설명하고 올바르지 않으면 무엇이 잘못되었는지 설명하고 고친다.
@@ -258,3 +263,135 @@ int i = 42; void *p = &i; long *lp = &i;
 
 void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므로 p에 대한 초기화는 옳지만 long *lp = &int와 같은 내부적 형변환은 C++에서 금지하고 있다.
 
+## Exercise 2.25
+> 다음 각 변수에 대한 타입과 값을 결정한다.
+- (a) int* ip, i, &r = i;
+- (b) int i, *ip = 0;
+- (c) int * ip, ip2;
+
+## Exercise 2.26
+> 다음에서 옳은 것을 찾고, 옳지 않은 것은 이유를 설명한다.
+- (a) const int buf;
+- (b) int cnt = 0;
+- (c) const int sz = cnt;
+- (d) ++cnt; ++sz;
+
+## Exercise 2.27
+> 다음 초기화 중 옳은 것을 찾고 이유를 설명한다.
+- (a) int i = -1, &r = 0;
+- (b) int *const p2 = &i2;
+- (c) const int i = -1, &r = 0;
+- (d) const int *const p3 = &i2;
+- (e) const int *pi = &i2;
+- (f) const int &const r2;
+- (g) const int i2 = i, &r = i;
+
+
+## Exercise 2.28
+> 다음 정의를 설명하고 옳지 않은 것을 찾는다.
+- (a) int i, *const cp;
+- (b) int *p1, *const p2;
+- (c) const int ic, &r = ic;
+- (d) const int *const p3;
+- (e) const int *p;
+
+## Exercise 2.29
+> 앞 연습문제에 있는 변수를 사용해 다음 대입 중 옳은 것을 찾고 이유를 설명한다.
+- (a) i = ic;
+- (b) p1 = p3;
+- (c) p1 = &ic;
+- (d) p3 = &ic;
+- (e) p2 = p1;
+- (f) ic = *p3;
+
+## Exercise 2.30 
+> 다음 각 선언에서, 객체의 상위나 하위 const가 있는지 찾는다.
+```cpp
+const int v2 = 0;
+int v1 = v2;
+int *p1 = &v1, &r1 = v1;
+const int *p2 = &v2, *const p3 = &i, &r2 = v2;
+```
+
+## Exercise 2.31
+> 앞 연습문제에 있는 선언에 대해 다음 대입이 옳은지 확인한다. 각 경우에 상위 또는 하위 const가 어떻게 적용되는지 설명한다.
+```cpp
+r1 = v2;
+p1 = p2;
+p2 = p1;
+p1 = p3;
+p2 = p3;
+```
+
+## Exercise 2.32 
+> 다음 코드가 옳은지 여부를 확인하고, 옳지 않다면 어떻게 바로 잡을 수 있을지 설명한다.
+```cpp 
+int null = 0, *p = null;
+
+## Exercise 2.33
+> 이 절에서 예로 든 변수 정의를 사용해 다은 각 대입은 어떻게 되는지 설명한다.
+```cpp
+a = 42;
+b = 42;
+c = 42;
+d = 42;
+e = 42;
+f = 42;
+g = 42;
+```
+
+## Exercise 2.34
+> 앞 연습문제에 있는 변수와 대입을 사용해 프로그랩을 만든다. 대입 앞뒤에서 각 변수를 출력해 앞 연습문제에서 예상한 내용이 맞는지 확인한다. 맞지 않으면 뭐가 잘못됐는지 정확히 알 때까지 예제를 학습한다.
+
+
+## Exercise 2.35
+> 다음 각 정의에서 추론한 타입을 설명한다. 타입을 모두 설명한 후에는 프로그램을 만들어 맞는지 확인한다.
+```cpp
+const int i = 42;
+auto j = i;
+const auto &k = i;
+auto *p = &i;
+const auto j2 = i, &k2 = i;
+```
+
+## Exercise 2.36
+> 다음 각 코드에서 각 변수의 타입이 무엇인지, 코드를 마쳤을 때 각 변수이 값은 무엇인지 설명한다.
+```cpp
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype((b)) d = a;
+++c;
+++d;
+```
+
+## Exercise 2.37
+> 대입은 참조자 타입을 반환하는 표현식의 한 예이며 그 타입은 왼쪽 피연산자의 타입에 대한 참조자이다. 즉 i가 int라면 표현식 i = x의 타입은 int&이다. 그렇다면 다음 각 코드에서 각 변수의 타입과 값은 무엇이겠는가?
+```cpp
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype(a = b) d = a;
+```
+
+## Exercise 2.38
+> decltype과 auto 사이에 타입 추론 방법의 차이를 설명한다. auto와 decltype을 사용해 같은 타입으로 추론하는 예와 다른 타입으로 추론하는 예를 만든다.
+
+## Exercise 2.39
+> 다음 프로그램을 컴파일해 클래스 정의에 세미콜론을 빠뜨리면 어떻게 되는지 확인하고, 후에 참고할 수 있도록 메시지를 잘 기억한다.
+```cpp
+struct Foo { /* empty */ } // 주의: 세미콜론이 없다
+int main()
+{
+	return 0;
+}
+```
+
+## Exercise 2.40
+> Sales_data 클래스를 직접 만든다.
+
+
+## Exercise 2.41
+> 직접 만든 Sales_data 클래스를 사용해 1.5.1절, 1.5.2절, 1.6절  연습문제에서 만든 프로그램을 다시 만든다. 지금은 Sales_data 클래스를 main 함수와 같은 파일에 정의해야 한다.
+
+
+## Exercise 2.42
+> Sales_data.h 헤더를 직접 만들고 이를 사용해 2.6.2절 연습문제에서 만든 프로그램을 다시 만든다.
