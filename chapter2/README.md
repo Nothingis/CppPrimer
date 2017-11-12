@@ -1,3 +1,5 @@
+# Chapter 2
+
 ## Exercise 2.1
 > int, long, long long, short의 차이는 무엇인가? 
 부호 없는 타입과 부호 있는 타입, 그리고 float와 double의 차이는 무엇인가?
