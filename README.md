@@ -1,2 +1,3 @@
 # C++ Primer Exercises
-My answer for exersices from Stanley B. Lippman, Josee Lajoie, Barbara E. Moo C++ Primer 5th edition.
+
+책 C++ Primer 제 5 판 연습문제에 대한 저의 답입니다.
