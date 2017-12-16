@@ -451,7 +451,6 @@ const auto j2 = i, &k2 = i;
 
 j: int, k: const int&, p: const int*, j2: const int&
 
-코드는 [여기](ex2_35.cpp)
 
 ## Exercise 2.36
 > 다음 각 코드에서 각 변수의 타입이 무엇인지, 코드를 마쳤을 때 각 변수이 값은 무엇인지 설명한다.
