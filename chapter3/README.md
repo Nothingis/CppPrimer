@@ -39,7 +39,7 @@
 
 코드는 아래에
 
-[A](ex3_4a.cpp)
+[A](ex3_5a.cpp)
 [B](ex3_4b.cpp)
 
 ## Exercise 3.6
