@@ -7,14 +7,16 @@
 코드는 아래에
 
 [1.4.1 절](ex3_1a.cpp)
+
 [2.6.2 절](ex3_1b.cpp)
 
 ## Exercise 3.2
 > 표준 입력에서 한 번에 한 줄씩 읽는 프로그램을 만든다. 이 프로그램을 고쳐 한 번에 한 단어를 읽도록 한다.
 
 
-코드는 [여기](ex3_2a.cpp)
-코드는 [여기](ex3_2b.cpp)
+코드는 [ex3_2a](ex3_2a.cpp)
+
+코드는 [ex3_2b](ex3_2b.cpp)
 
 ## Exercise 3.3
 > string 입력 연산자와 getline 함수에서 공백 문자를 처리하는 방법을 설명한다.
@@ -32,6 +34,7 @@
 코드는 아래에
 
 [A](ex3_4a.cpp)
+
 [B](ex3_4b.cpp)
 
 ## Exercise 3.5
@@ -41,6 +44,7 @@
 코드는 아래에
 
 [A](ex3_5a.cpp)
+
 [B](ex3_4b.cpp)
 
 ## Exercise 3.6
@@ -65,6 +69,7 @@ char 타입의 변수 c는 str의 문자 하나를 복사해 for 의 명령을 �
 코드는 아래에
 
 [while](ex3_8a.cpp)
+
 [for](ex3_8b.cpp)
 
 ## Exercise 3.9
@@ -167,6 +172,7 @@ for (int i = 0; i != 10; ++i) ivec3.push_back(42);
 코드는 아래에
 
 [A](ex3_20a.cpp)
+
 [B](ex3_20b.cpp)
 
 ## Exercise 3.21
