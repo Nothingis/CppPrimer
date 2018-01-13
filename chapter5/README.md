@@ -2,32 +2,70 @@
 
 ## Exercise 5.1
 > 널 문은 무엇이고 언제 사용할 수 있는지 설명한다.
+
+```cpp
+;
+```
+널 문은 문장은 필요하지만 프로그램 논리 구조는 필요하지 않을 때 사용한다.
+
 ## Exercise 5.2
 > 구역은 무엇이고 언제 사용할 수 있는지 설명한다.
+
+중괄호 쌍으로 둘러싼 일련의 문장.
+
+단일 문장이 필요하지만 프로그램 논리 구조는 하나이 이상이 필요할 때 사용한다.
+
 ## Exercise 5.3
-> 1.4.1절 프로그램 while 루프에서 구역을 사용하지 않도록 쉼표 연산자(4.10절)를 사용해 다시 만든다. 새로 만든 코드는 가시성이 좋아지는지 오히려 나빠지는지 설명한다.
+> 1.4.1절 프로그램의 while 루프에서 구역을 사용하지 않도록 쉼표 연산자(4.10절)를 사용해 다시 만든다. 새로 만든 코드는 가시성이 좋아지는지 오히려 나빠지는지 설명한다.
+
+```cpp
+while (val <= 10 )
+	sum +=val, ++val;
+	std::cout << "Sum of 1 to 10 inclusive is " << sum << std::endl;	
+```
+
+가시성이 나빠진다.
+
 ## Exercise 5.4
 > 다음 예 각각을 설명하고 발견한 문제가 있으면 바로잡는다.
 
 - (a) 
 ```cpp
 while (string::iterator iter != s.end()) { /* ... */ }
+// 선언이 잘 못 되었다. 다음과 같이 고친다.
+```
+```cpp
+std::string::iterator iter = s.begin();
+while (iter != s.end()) { /* ... */ }
 ```
 - (b)
 ```cpp
 while (bool status = find(word) { /* ... */ }
 		if (!status) { /* ... */ }
+//status 변수를 while 밖에서 볼 수 없다.
 ```
+```cpp
+while (bool status = find(word) {
+		if (!status) { /* ... */ }
+		}
+```
+
 ## Exercise 5.5
 > if-else 문을 사용해 수치 점수를 문자로 된 평점으로 바꾸는 프로그램을 직접 만든다.
+
+코드는 [여기](ex5_5.cpp)
+
 ## Exercise 5.6
 > 직접 만든 성적 프로그램을 if-else 문 대신 조건 연산자(4.7절)를 사용해 다시 만든다.
+
+코드는 [여기](ex5_6.cpp)
+
 ## Exercise 5.7
 > 다음 각 코드에서 오류를 수정한다.
 - (a)
 ```cpp
 if (ival1 != ival2)
-	ival1 = ival2
+	ival1 = ival2 //세미 콜론
 else ival1 = ival2 = 0;
 ```
 - (b)
@@ -35,27 +73,49 @@ else ival1 = ival2 = 0;
 if (ival < minval)
 	minval = ival;
 	occurs = 1;
+	// 중괄호 필요
 ```
 - (c)
 ```cpp
 if (int ival = get_value())
 	cout << "ival = " << ival << endl;
+if (!ival)
+	cout << "ival = " << ival << endl;
 ```
+두 번째 if문은 else if 필요
+
 - (d)
 ```cpp
-if (ival = 0)
-	ival = get_value());
+if (ival = 0) // == 필요
+	ival = get_value();
 ```
 ## Exercise 5.8
 > '모호한 else'가 무엇인지, C++에서 else 절을 어떻게 처리하는지 설명한다.
+
+if가 많고 else가 있을 때 else가 어떤 if에 속하는지 판단하기 모호해지는 것.
+
+c++에서는 else를 앞서 나온 if 중에서 다른 else롸 결합하지 않았으며 가장 가까운 것과 결합한다.
+
 ## Exercise 5.9
 > cin에서 읽은 내용에서 모음 수를 세는 프로그램을 일련의 if 문을 사용해 만든다.
+
+코드는 [여기](ex5_9.cpp)
+
 ## Exercise 5.10
 > 예로 들며 구현한 모음을 세는 프로그램에는 한 가지 문제가 있다. 즉 대문자인 모음은 세지 않는다. 그러므로 대소문자 모두 해당 모음을 세도록 프로그램을 만든다. 즉 'a'와 'A' 모두 aCnt를 증가시켜야 한다.
+
+코드는 [여기](ex5_10.cpp)
+
 ## Exercise 5.11
 > 모음을 세는 프로그램을 고쳐 빈칸, 탭, 줄바꿈 수도 세도록 한다.
+
+코드는 [여기](ex5_11.cpp)
+
 ## Exercise 5.12
 > 모음을 세는 프로그램을 고쳐 ff, fl, fi가 나타나는 횟수도 세도록 한다.
+
+코드는 [여기](ex5_12.cpp)
+
 ## Exercise 5.13
 > 다음의 각 프로그램에는 흔한 프로그래밍 오류가 있다. 각 오류를 찾고 올바르게 고친다.
 - (a)
@@ -68,6 +128,7 @@ if (ival = 0)
 	default: iouCnt++;
  }
 ```
+각 케이스에 break가 없다.
 - (b) 
 ```cpp
 unsigned index = some_value();
@@ -81,6 +142,7 @@ switch (index) {
 		ivec[ ix ] = index;
 }
 ```
+변수 ix에 대한 선언이 default 케이스에 대해 우회된다.
 - (c)
 ```cpp
 unsigned evenCnt = 0, oddCnt = 0;
@@ -94,6 +156,7 @@ switch (digit) {
 		break;
 }
 ```
+케이스에 콜론(:)
 - (d)
 ```cpp
 unsigned ival = 512, jval = 1024, kval = 4096;
@@ -111,8 +174,13 @@ switch(swt) {
 		break;
 }
 ```
+케이스에 대한 라벨은 const expression이여야 한다.
+
 ## Exercise 5.14
 > 표준 입력에서 string을 읽고 중복 단어를 찾는 프로그램을 만든다. 프로그램에서는 입력 내용에서 어떤 단어 바로 다음에 같은 단어가 나오는지 확인한다. 한 단어에 대해 가장 많이 반복한 횟수와 해당 단어를 추적하고, 최대 중복 횟수나 반복한 단어가 없음을 알리는 메시지를 출력한다. 예를 들어 입력 내용이 how now now now brown cow cow 이면 출력은 now가 3번 있었음을 나타내야 한다.
+
+코드는 [여기](ex5_14.cpp)
+
 ## Exercise 5.15
 > 다음 각 루프를 설명하고 문제가 있으면 올바르게 고친다.
 - (a)
