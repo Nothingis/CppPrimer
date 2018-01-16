@@ -375,6 +375,7 @@ void *는 모든 형태의 객체를 가르킬 수 있는 특별한 타입이므
 
 ## Exercise 2.30 
 > 다음 각 선언에서, 객체의 상위나 하위 const가 있는지 찾는다.
+
 ```cpp
 const int v2 = 0;
 int v1 = v2;
@@ -407,12 +408,14 @@ p2 = p3;
 ```cpp 
 int null = 0, *p = null;
 ```
-
+다음과 같이 고친다.
+```cpp
 int null = 0, *p = nullptr;
-
+```
 
 ## Exercise 2.33
 > 이 절에서 예로 든 변수 정의를 사용해 다은 각 대입은 어떻게 되는지 설명한다.
+
 ```cpp
 a = 42;
 b = 42;
@@ -508,9 +511,13 @@ struct Sales_data
 ## Exercise 2.41
 > 직접 만든 Sales_data 클래스를 사용해 1.5.1절, 1.5.2절, 1.6절  연습문제에서 만든 프로그램을 다시 만든다. 지금은 Sales_data 클래스를 main 함수와 같은 파일에 정의해야 한다.
 
-TODO
+[1.5.1](ex2_41a.cpp)
+
+[1.5.2](ex2_41b.cpp)
+
+[1.6](ex2_41c.cpp)
 
 ## Exercise 2.42
 > Sales_data.h 헤더를 직접 만들고 이를 사용해 2.6.2절 연습문제에서 만든 프로그램을 다시 만든다.
 
-TODO
+### TODO
