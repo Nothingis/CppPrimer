@@ -2,7 +2,7 @@
 
 using std::cin;
 using std::cout;
-usidng std::endl;
+using std::endl;
 
 int main()
 {

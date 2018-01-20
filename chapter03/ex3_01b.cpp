@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-/* #include "Sales_data.h" */
+#include "include/Sales_data.h"
 
 using std::cin;
 using std::cout;
@@ -15,10 +15,10 @@ int main()
 
 	cin >> data1.bookNo >> data1.units_sold >> price;
 
-	data1.revenu = data1.units_sold * price;
+	data1.revenue = data1.units_sold * price;
 
 	cin >> data2.bookNo >> data2.units_sold >> price;
-	date2.revenu = data2.units_sold * price;
+	data2.revenue = data2.units_sold * price;
 
 	if (data1.bookNo == data2.bookNo)
 	{
