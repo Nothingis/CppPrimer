@@ -1,7 +1,5 @@
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
 		for (unsigned score; std::cin >> score;)
