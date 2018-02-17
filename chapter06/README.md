@@ -3,6 +3,11 @@
 ## Exercise 6.1
 > 매개변수와 인자 사이에 차이를 설명한다.
 
+매개변수: 함수의 매개변수 목록에서 선언된 지역 변수들. 함수가 호출될 때의 인자들로 초기화 된다.
+
+
+인자: 함수의 매개변수를 초기화할 때 쓰는 변수
+
 ## Exercise 6.2
 > 다음 함수에 어떤 오류가 있는지 나타내고 이유를 설명한다. 그 문제를 어떻게 바로잡을 수 있는 지 설명한다.
 - (a)
@@ -13,56 +18,215 @@ int f() {
 	return s;
 	}
 ```
+
+리턴 값이 string이어야 한다.
 - (b)
 ```cpp
 f2(int i) { /* ... */ }
 ```
+return 값 명시해야 한다. (void)
 - (c)
 ```cpp
 int calc(int v1, int v1) /* ... */ }
 ```
+매개변수 목록에 같은 이름을 두 번 쓸 수 없다.
 - (d)
 ```cpp
 duoble square(double x) return x * x;
 ```
+함수의 몸체에 괄호가 필요하다.
 
 ## Exercise 6.3
 > fact를 직접 만들고 확인한다.
+
+```cpp
+int fact (int i)
+{
+	if (i < 0) {
+		runtime_error err("Input cannot be negative number");
+		cout << err.what() << endl;
+	}
+	return i > 1 ? * fact (i - 1) : 1;
+}
+
+int main()
+{
+	std::cout << std::boolalpha << (120 == fact(5)) << std::endl;
+	return 0;
+}
+```
 ## Exercise 6.4
 > 사용자에게 수를 요청하고 그 수의 계승을 계산하는 함수를 만든 후 main에서 그 함수를 호출한다.
+
+```cpp
+int fact(int i)
+{
+	return i > 1 ? i * fact(i - 1) : 1;
+}
+
+void interactive_fact()
+{
+	for (int i; std::cin >> i; )
+		std::cout << fact(i) << std::endl;
+}
+
+int main()
+{
+	interactive_fact();
+	return 0;
+}
+```
 ## Exercise 6.5
 > 함수에서 받은 인자의 절대 값을 반환하는 함수를 만든다.
+
+```cpp
+int abs(int i)
+{
+	return i > 0 ? i : -i;
+}
+
+int main()
+{
+	std::cout << abs(-1) << std::endl;
+	return 0;
+}
+```
+
 ## Exercise 6.6
 > 매개변수, 지역변수, 지역 static 변수 사이에 차이를 설명하고 각각이 유용한 함수의 예를 든다.
+
+매개변수: 함수 인자 목록에 선언되는 지역 변수
+
+
+지역 변수: 블록안에서 정의된 변수
+
+
+지역 static 변수: 정의를 처음 실행하기 전에 초기화, 함수가 끝나도 유지되고 프로그램이 끝나면 없어진다.
+
+```cpp
+size_t count_add(int n)
+{
+	static size_t cnt = 0;
+	cnt += n;
+	return cnt;
+}
+
+int main()
+{
+	for (size_t i = 0; i != 10; ++i)
+		std::cout << count_add(i) << std::endl;
+
+	return 0;
+}
+```
 ## Exercise 6.7
 > 처음 호출할 때는 0을 반환하고 이후에는 호출할 때마다 순차열에 숫자를 생성하는 함수를 만든다.
+
+```cpp
+size_t generate()
+{
+	static size_t cnt = 0;
+	return cnt++;
+}
+```
 ## Exercise 6.8
 > Chapter6.h라는 이름으로 헤더 파일을 만들고 6.1절 연습문제에서 만든 함수의 선언을 담는다.
+
+코드는 [여기](Chapter6.h)
+
 ## Exercise 6.9
 > fact.cc와 factMain.cc 파일을 직접 만든다. 이 파일에는 앞 절의 연습문제에서 만든 Chapter6.h를 포함해야 한다. 그리고 이 파일을 사용해 컴파일러에서 분리 컴파일을 어떻게 지원하는지 이해한다.
+
+[fact.cc](fact.cc)
+
+[factMain.cc](factMain.cc)
+
 ## Exercise 6.10
 > 포인터를 사용해 두 int 값을 교환하는 함수를 만든다. 이 함수를 호출하고 교환한 값을 출력해 확인한다.
+
+코드는 [여기](ex6_10.cpp)
+
 ## Exercise 6.11
 > 참조자를 취하는 reset 버전을 직접 만들고 확인한다.
+
+코드는 [여기](ex6_11.cpp)
+
 ## Exercise 6.12
 > 6.2.1절 연습문제 6.10에서 만든 프로그램을 고쳐 포인터 대신 참조자를 사용해 두 int 값을 교환하도록 한다. 생각하기에 어느 버전이 더 사용하기 쉬운지, 왜 그런지 설명한다.
+
+코드는 [여기](ex6_12.cpp)
+
+참조자가 더 쉽다
+
 ## Exercise 6.13
 > T를 타입 이름이라고 할 때 void f (T)와 void f (T&)로 선언한 함수 사이의 차이를 설명한다.
+
+void f(T)는 값으로 인자를 전달한다. 함수가 실제 인자에는 영향을 주지 않는다. 
+
+void f(&T)는 참조자를 전달한다. 함수가 실제 인자에 영향을 준다.
+
 ## Exercise 6.14
 > 언제 매개변수를 참조자 타입으로 해야 하는지 예를 든다. 매개변수를 참조자 타입으로 하면 안되는 때는 언제인지 예를 든다.
+
+```cpp
+//참조자 타입이어야 한다.
+void reset(int &i)
+{
+	i = 0;
+}
+
+//참조자 타입이면 안된다.
+void print(iterator begin, iterator end)
+{
+	for (iterator iter = begin; iter != end; ++iter)
+		cout << *iter << std::endl;
+}
+```
+
 ## Exercise 6.15
 > find_char의 각 매개변수 타입에 대한 이론적 근거를 설명한다. 특히 s는 const에 대한 참조자인데 occurs는 보통의 참조자인 이유는 무엇일까? 다른 매개변수는 참조자인데 char 매개변수 c는 아닌 이유는 무엇인가? s를 보통의 참조자로 사용하면 어떻게 되는가? occurs를 const에 대한 참조자로 하면 어떻게 되는가?
+
+s는 이 함수로 인해 값이 변경되지 않지만, occurs는 그러하다.
+
+c는 임시적인 변수이다.
+
+s가 이 함수로 인해 변경될 가능성이 있다.
+
+occurs를 변경할 때 오류가 발생한다.
+
 ## Exercise 6.16
 > 다음 함수는 올바를지라도 보기보다 그다지 유용하진 않다. 이 함수의 한계가 무엇인지 설명하고 올바르게 고친다.
 ```cpp
 bool is_empty(string& s) { return s.empty(); }
 ```
+
+const string과 const 함수에서 쓸 수 없다.
+
+다음과 같이 고친다.
+
+```cpp
+bool is_empty(const string& s) { return s. empty(); }
+```
+
 ## Exercise 6.17
 > string에 대문자가 있는지 확인하는 함수와 string 내용을 모두 소문자로 바꾸는 함수를 만든다. 이 함수에서 사용한 매개변수의 타입이 같은지 확인한다. 같은지 다른지 각각에 대해 이유와 함께 설명한다.
+
+코드는 [여기](ex6_17.cpp)
+
+다르다. 하나는 const가 있어야 한다.
+
 ## Exercise 6.18
 > 다음 각 함수에 대한 선언을 만든다 선언을 만들 때는 각 함수에서 하는 일을 나타내는 함수 이름을 사용한다.
 - (a) bool을 반환하고 matrix 클래스에 대한 참조자인 매개변수가 둘인 compare 함수
+
+```cpp
+bool compare(matrix& m1, matrix& m2);
+```
 - (b) vector<int> 반복자를 반환하고 두 매개변수 중 하나는 int, 다른 하나는 vector<int>에 대한 반복자를 취하는 함수 change_val
+```cpp
+vector<int>::iterator change_val(int, vector<int>::iterator);
+```
+
 ## Exercise 6.19
 > 다음 선언에 대해 올바른 것과 그렇지 않은 것을 찾는다. 올바르지 않은 것은 이유를 설명한다.
 ```cpp
@@ -75,44 +239,102 @@ vector<int> vec(10);
 ```cpp
 calc(23.4, 55.1)
 ```
+
+매개변수가 하나이어야 한다.
+
 - (b) 
 ```cpp
 count("abcda", 'a');
 ```
+
+적합
 - (c)
 ```cpp
 calc(66);
 ```
+
+적합
 - (d)
 ```cpp
 sum(vec.begin(), vec.end(), 3.8);
 ```
+
+적합
+
 ## Exercise 6.20
 > 참조자 매개변수를 const에 대한 참조로 해야 할 때는 언제인지, const에 대한 참조자여야 할 때 보통의 참조자를 사용하면 어떻게 되는지 설명한다.
+
+참조자를 이용해서 값을 변경하지 않을 때는 항상 쓰는 것이 좋다.
+
+const 변수에 대한 함수 호출을 할 수 없다.
+
 ## Exercise 6.21
 > int와 int에 대한 포인터를 취하고 int 값이나 그 포인터에서 가리키는 값보다 더 큰 값을 반환하는 함수를 만든다. 그 포인터를 어떤 타입으로 정의해야 하는가?
+
+```cpp
+int lager(const int i, const int *const p)
+{
+	return (i > *p) ? i : *p;
+}
+```
+
 ## Exercise 6.22
 > 두 int 포인터를 교환하는 함수를 만든다.
+
+```cpp
+void swap(int*& lhs, int*& rhs)
+{
+	auto tmp = lhs;
+	lhs = rhs;
+	rhs = tmp;
+}
+```
+
 ## Exercise 6.23
 > 이 절에서 보여 준 각 print 함수 버전을 직접 만들고 각각을 호출해 다음처럼 정의한 i와 j를 출력한다.
 ```cpp
 int i = 0, j[2] = { 0, 1};
 ```
+
+코드는 [여기](ex6_23.cpp)
+
 ## Exercise 6.24
 > 다음 함수 행동을 설명한다. 코드에 문제가 있으면 무엇인지, 어떻게 고칠 수 있는지 설명한다.
 ```cpp
 void print(const int ia[10])
 {
 	for (size_t i = 0; i != 10; ++i)
-		cout <, ia[i] << endl;
+		cout << ia[i] << endl;
+}
+```
+
+배열을 함수에 전달할 때는 실제로는 배열의 값이 아니라 포인터를 넘겨준다.
+
+따라서 배열의 크기를 보장하지 못 한다.
+
+배열의 크기가 10인 배열만 넘겨주고 싶을 때는 다음과 같이 고친다.
+
+```cpp
+void print(const int (&ia)[10])
+{
+	/* ... */
 }
 ```
 ## Exercise 6.25
 > 두 인자를 취하는 main 함수를 만들고 제공한 인자를 결합한 후 결과 string을 출력한다.
+
+코드는 [여기](ex6_25.cpp)
+
 ## Exercise 6.26
 > 이 절에서 보여 준 선택 내용을 받아들이는 프로그램을 만들고 main에 전달한 인자 값을 출력한다.
+
+코드는 [여기](ex6_26.cpp)
+
 ## Exercise 6.27
 > initializer_list<int>를 취하고 이 목록 내 요소의 합을 계산하는 함수를 만든다.
+
+코드는 [여기](ex6_27.cpp)
+
 ## Exercise 6.28
 > ErrCode 매개변수를 취하는 두 번째 error_msg 버전에서 for 루프 내 elem의 타입은 무엇인지 설명한다.
 ## Exercise 6.29
