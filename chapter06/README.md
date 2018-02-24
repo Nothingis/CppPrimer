@@ -337,12 +337,27 @@ void print(const int (&ia)[10])
 
 ## Exercise 6.28
 > ErrCode 매개변수를 취하는 두 번째 error_msg 버전에서 for 루프 내 elem의 타입은 무엇인지 설명한다.
+
+const std::string&
+
 ## Exercise 6.29
 > 범위 for에서 initializer_list를 사용할 때 루프 제어 변수로 참조자를 사용할 경우가 있는가? 그렇다면 왜 그런지, 그렇지 않다면 또 왜 그렇지 않은지 설명한다.
+
+복사가 무겁지 않은 경우 (int...) 참조자를 사용하지 않아도 되고, 그렇지 않은 경우 참조자를 사용하는 편이 좋다.
+
 ## Exercise 6.30
 > 260쪽에 있는 str_subrange를 컴파일해, 사용하는 컴파일러에서 나타낸 오류는 무엇인지 확인한다.
+
+
+ex6_30.cpp:16:4: error: return-statement with no value, in function return
+ing ‘bool’ [-fpermissive]
+    return;
+
 ## Exercise 6.31
 > 참조자와 const에 대한 참조자 각각에 대해 언제 반환해야 유효한지 설명한다.
+
+참조자로 참조하고 있는 객체가 이전부터 존재하고 있는가?
+
 ## Exercise 6.32
 > 다음 함수가 옳은지 확인한다. 옳다면 무엇을 하는지 설명하고 옳지 않다면 오류를 바로잡고 그에 대해 설명한다.
 ```cpp
@@ -353,21 +368,56 @@ int main() {
 		get(ia, i) = i;
 }
 ```
+
+유효하다. ia 배열에 0 ~ 9의 값을 준다.
+
 ## Exercise 6.33
 > vector 내용을 출력하는 재귀 함수를 만든다.
+
+코드는 [여기](ex6_33.cpp)
+
 ## Exercise 6.34
 > factorial에서 중지 조건이 다음과 같으면 어떻게 될지 설명한다.
 ```cpp
 if (val != 0)
 ```
+
+값이 음수일 경우 재귀가 멈추지 않는다.
+
 ## Exercise 6.35
 > factorial 호출에서 val--가 아니라 val-1을 전달한 이유를 설명한다.
+
+val을 값으로 복사해 사용하기 때문에 감소하기 전의 val을 사용. 재귀 루프가 발생한다.
+
 ## Exercise 6.36
 > string이 10개인 배열에 대한 참조자를 반환하는 함수 선언을 후행 반환, decltype, 타입 별칭을 사용하지 않고 만든다.
+
+```cpp
+string (&func(string (&arrStr)[10]))[10]
+```
+
 ## Exercise 6.37
 > 앞 연습문제의 함수에 대해 세 가지 선언을 추가로 만든다. 하나는 타입 별칭, 다른 하나는 후행 반환, 세 번째는 decltype을 사용한다. 선호하는 형식을 이유와 함께 설명한다.
+
+```cpp
+using ArrT = string[10];
+ArrT& func(ArrT& arr);
+
+auto func2(ArrT& arr) -> string(&)[10];
+string arrS[10];
+decltype(arrS)& func3(ArrT& arr);
+```
+
 ## Exercise 6.38
 > arrPtr을 고쳐 그 배열에 대한 참조자를 반환하도록 한다.
+
+```cpp
+decltype(arrStr)& arrPtr(int i)
+{
+	return (i % 2) ? odd : even;
+}
+```
+
 ## Exercise 6.39
 > 다음 각 선언 집합에서 두 번째 선언이 미치는 영향을 설명한다. 위법인 것이 있으면 지시한다.
 - (a)
@@ -375,26 +425,41 @@ if (val != 0)
 int clac (int, int);
 int clac (const int, const int);
 ```
+
+위법
+
 - (b)
 ```cpp
 int get();
 double get();
 ```
+
+위법
+
 - (c)
 ```cpp
 int *reset(int *);
 double *reset(double *);
 ```
+
+적법
+
 ## Exercise 6.40
 > 다음 선언 중 오류가 있는 것은 어느 것인지 설명한다.
 - (a)
 ```cpp
 int ff(int a, int b = 0, int c = 0);
 ```
+
+오류 없다
+
 - (b)
 ```cpp
 char *init(int ht = 24, int wd, char bckgrnd);
 ```
+
+오류. 기본값은 뒤에서 부터
+
 ## Exercise 6.41
 > 다음 호출 중 옳지 않은 것이 있으면 어느 것인지 설명한다. 옳지만 프로그래머의 의도와 일치하지 않아 보이는 것이 있으면 어느 것인지 설명한다.
 ```cpp
@@ -404,60 +469,124 @@ char *init(int ht, int wd = 80, char bckgrnd = ' ');
 ```cpp
 init();
 ```
+
+위법. 해당되는 init을 찾을 수 없다.
+
 - (b) 
 ```cpp
 init(24,10);
 ```
+
+적법.
+
 - (c)
 ```cpp
 init(14, '*');
 ```
+
+적법하지만 wd가 '*'로 세팅된다.
+
 ## Exercise 6.42
-> make_plural의 두 번째 매개변수에 기본 인자로 's'를 지정하고, 단어로 사용한 success롸 failure의 단수형과 복수형을 출력해 프로그램을 시험한다.
+> make_plural의 두 번째 매개변수에 기본 인자로 's'를 지정하고, 단어로 사용한 success와 failure의 단수형과 복수형을 출력해 프로그램을 시험한다.
+
+코드는 [여기](ex6_42.cpp)
+
 ## Exercise 6.43
 > 다음 선언과 정의 중 헤더에 두어야 하는 것과 소스 파일에 두어야 하는 것을 찾고 이유를 설명한다.
+
 - (a)
 ```cpp
 inline bool eq(const BigInt&, const BigInt&) {...}
 ```
+
+인라인이므로 헤더에 두어야 한다.
+
 - (b)
 ```cpp
 void putValues(int *arr, int size);
 ```
+
+선언이므로 헤더에 두어야 한다.
+
 ## Exercise 6.44
 > 6.2.2.절에 있는 isShorter를 inline으로 다시 만든다.
+
+코드는 [여기](ex6_44.cpp)
+
 ## Exercise 6.45
 > 지금까지 연습문제에서 만든 프로그램을 살펴보고 inline으로 정의해야 할지 판단한다. 그렇제 한다면 그렇게 하고, 그렇게 하지 않는다면 왜 inline으로 하면 안 되는지 설명한다.
+
+연습문제 6.38과 연습문제 6.42는 inline으로 정의해야 한다. 또한 연습문제 6.4는 함수가 작지 않고 딱 한 번만 호출되므로 inline으로 정의되면 안된다.
+
 ## Exercise 6.46
 > isShorter를 constexpr로 정의할 수 있으면 그렇게 하고, 그렇게 할 수 없으면 이유를 설명한다.
+
+할 수 없다. std::string::size()는 constexpr 함수가 아니고 s1.size() == s2.size()는 const 표현식이 아니다.
+
 ## Exercise 6.47
 > 6.3.2.절 연습문제에서 만든, 재귀를 사용해 vector 내용을 출력하는 프로그램을 고쳐 실행 정보를 조건에 따라 출력하도록 한다. 예를 들어 매 호출마다 vector 크기를 출력할 수도 있다. 오류 수정용 기능이 동작하도록 설정한 후 컴파일, 실행하고 기능이 동작하지 않도록 해제한 후 다시 반복한다.
+
+코드는 [여기](ex6_47.cpp)
+
 ## Exercise 6.48
 > 다음 루프에서 하는 일과 assert를 잘 사용했는지 설명한다.
 ```cpp
 string s;
-while (cin >> s &&s != sought) { } //빈 본체
+while (cin >> s && s != sought) { } //빈 본체
 assert(cin)
 ```
+
+사용자가 입력한 문자열이 sought과 동일할 때가지 입력을 요구한다.
+
+사용자가 문자열을 입력하면 cin은 항상 참이다.
+
+assert(s == sought)가 더 적절해 보인다.
+
 ## Exercise 6.49
 > 후보 함수와 호출 가능 함수가 무엇인지 설명한다.
+
+후보 함수: 호출을 고려할 수 있는 다중 정의한 함수 집합
+
+호출 가능 함수: 주어진 호출에서 사용한 인자로 호출할 수 있는 함수를 후보 함수 집합에서 선택한 함수
+
 ## Exercise 6.50
 > 284쪽에 있는 f에 대한 선언이 있을 때 다음 각 호출에 대해 호출 가능 함수가 있다면 나열한다. 가장 일치하는 함수가 어느 것인지, 호출이 옳지 않다면 일치하는 것이 없는지 또는 왜 호출이 모호한지 설명한다.
 - (a) f(2.56, 42)
+
+위법
+
 - (b) f(42)
+
+void f(int)와 일치
+
 - (c) f(42, 0)
+
+void f(int, int)와 일치
+
 - (d) f(2.56, 3.14)
+
+void f(double, double = 3.14)와 일치
+
 ## Exercise 6.51
 > 네 가지 f 버전을 만든다. 각 함수에서는 구별할 수 있는 메시지를 출력해야 한다. 앞 연습문제 답을 확인하고 답이 옳지 않으면 왜 잘못됐는지 이해할 때까지 이 절을 학습한다.
+
+코드는 [여기](ex6_51.cpp)
+
 ## Exercise 6.52
-> 선언지 다음과 같을 때
+> 선언이 다음과 같을 때
 ```cpp
 void manip(int, int);
 double dobj;
 ```
 다음 호출에서 각 변환의 순위가 어떻게 되는지 설명한다.
 - (a) manip('a', 'z');
+
+int 승격이 일어난다.
+
 - (b) manip(55.4, dobj);
+
+산술변환이 일어난다.
+
 ## Exercise 6.53
 > 다음 각 선언 집합에서 두 번째 선언이 미치는 영향을 설명하고, 옳지 않은 것이 있으면 어느 것인지 나타낸다.
 - (a)
@@ -465,19 +594,53 @@ double dobj;
 int calc(int&, int&);
 int calc(const int&, const int&);
 ```
+
+적법
+
 - (b)
 ```cpp
-int calc(char*, char*(;
+int calc(char*, char*);
 int calc(const char*, const char*);
 ```
+
+적법
+
 - (c)
 ```cpp
 int calc(char*, char*);
 int calc(char* const, char* const);
 ```
+
+위법.
+
 ## Exercise 6.54
 > 두 int 매개변수를 취하고 int를 반환하는 함수에 대한 선언을 만들고, 이 함수 포인터 타입을 요소로 하는 vector를 선언한다.
+
+```cpp
+int func(int a, int b);
+
+using FP1 = decltype(func) *;
+typedef decltype(finc) *FP2;
+using FP3 = int (*)(int a, int b);
+using FP4 = int(int a, int b);
+typedef int(*FP5)(int a, int b);
+using FP6 = decltype(func);
+
+std::vector<FP1> v1;
+std::vector<FP1> v2;
+std::vector<FP1> v3;
+std::vector<FP1> v4;
+std::vector<FP1> v5;
+std::vector<FP1> v6;
+```
+
 ## Exercise 6.55
 > 두 int 값을 더하고 빼며 곱하고 나누는 네 함수를 만든다. 앞 연습문제에서 만든 vector에 이 함수에 대한 포인터를 저장한다.
+
+코드는 [여기](ex6_55.cpp)
+
+
 ## Exercise 6.56
 > 이 vector의 각 요소를 호출하고 결과를 출력한다.
+
+코드는 [여기](ex6_56.cpp)
