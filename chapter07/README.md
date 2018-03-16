@@ -115,22 +115,46 @@ private: name, address.
 ## Exercise 7.20
 > 프렌드가 유용할 때는 언제인가? 프렌드를 사용할 때 장단점을 논의한다.
 
+장점:
+
+- * 모든 non-public 멤버에게 모두 접근할 수 있다.
+
+단점:
+
+- * 캡슐화를 줄이고 유지보수를 어렵게 한다.
+
 ## Exercise 7.21
 > 직접 만든 Sales_data 클래스를 갱신해 구현을 숨기도록 한다. Sales_data 연산을 사용하도록 만든 프로그램은 여전히 잘 작동해야 한다. 새 클래스 정의를 사용하는 프로그램을 재컴파일 하고 여전히 잘 작동하는지 검증한다.
+
+코드는 [여기](ex7_21.h)
+
 
 ## Exercise 7.22
 > Person 클래스를 갱신해 구현 내용을 숨기도록 한다.
 
+코드는 [여기](ex7_22.h)
+
 ## Exercise 7.23
 > Screen 클래스를 직접 만든다.
+
+코드는 [여기](ex7_23.h)
 
 ## Exercise 7.24
 > 직접 만든 Screen 클래스에 세 가지 생성자, 즉 기본 생성자, 높이와 폭에 대한 값을 취하고 지정한 수의 공백 문자로 내용을 초기화하는 생성자, 높이와 폭에 대한 값과 화면 내용으로 사용할 문자를 취하는 생성자를 추가한다.
 
+코드는 [여기](ex7_24.h)
+###TODO
 ## Exercise 7.25
 > Screen에서 복사와 대입에 대해 기본 버전에 의존해도 안전할지, 그렇지 않을지 이유와 함께 설명한다.
+
+
 ## Exercise 7.26
 > Sales_data::avg_price를 inline 함수로 정의한다.
+
+[ex7_26.h](ex7_26.h)
+
+[ex7_26.cpp](ex7_26.cpp)
+
 ## Exercise 7.27
 > 직접 만든 Screen에 move, set, display 연산을 추가하고 다음 코드를 실행해 클래스를 시험한다.
 ```cpp
@@ -140,17 +164,49 @@ cout << "\n";
 myScreen.display(cout);
 cout << "\n";
 ```
+
+코드는 [여기](ex7_27.h)
+
 ## Exercise 7.28
 > move, set, display에서 Screen& 대신 Screen을 반환하면 앞 연습문제에서 어떤 일이 생길지 설명한다.
+
+set이 일시적인 복사 값을 변경하기 때문에 display를 적절하게 할 수 없다.
+
 ## Exercise 7.29
 > 직접 만든 Screen을 고쳐 move, set, display 함수에서 Screen을 반환하도록 하고 앞 연습문제에서 한 예상이 맞는지 확인한다.
+
+```cpp
+//&일 때
+XXXXXXXXXXXXXXXXXXXX#XXXX
+XXXXXXXXXXXXXXXXXXXX#XXXX
+                   ^^^
+//아닐 때
+XXXXXXXXXXXXXXXXXXXX#XXXX
+XXXXXXXXXXXXXXXXXXXXXXXXX
+                   ^^^
+```
+
 ## Exercise 7.30
 > this 포인터를 통해 멤버를 참조하는 것은 적법하지만 불필요하다. 명시적으로 this 포인터를 사용해 멤버에 접근하는 것에 대한 장단점을 논의한다.
 
+### 장점
+- * 직관적
+- * scope에 대해 이해가 쉽다
+- * 멤버 함수의 변수 이름을 멤버 이름과 같게 할 수 있다.
+
+### 단점
+- * 길어 진다??
+
 ## Exercise 7.31
 > X와 Y 클래스 쌍을 정의하는데 X에는 Y에 대한 포인터가 있고 Y에는 X 타입 객체가 있도록 한다.
+
+코드는 [여기](ex7_31.h)
+
 ## Exercise 7.32
 > screen과 window-mgr을 직접 정의한다. 이때 clear는 window-mgr의 멤버이며 screen의 프렌드이다.
+
+코드는 [여기](ex7_32.h)
+
 ## Exercise 7.33
 > Screen에 다음처럼 정의한 size 멤버를 추가하면 어떻게 될지 설명하고 문제가 있으면 고친다.
 ```cpp
@@ -159,10 +215,48 @@ pos Screen:size() const
 	return height * width;
 }
 ```
+
+unknown type name 'pos' 에러 발생
+
+다음과 같이 고친다.
+
+```cpp
+Screen::pos Screen::size() const
+{
+	return height*width;
+}
+```
+
 ## Exercise 7.34
 > 337쪽에 있는 Screen 클래스 마지막에 pos의 typedef를 둔다면 어떻게 될지 설명한다.
+
+```cpp
+dummy_fcn(pos height)
+           ^
+Unknown type name 'pos'
+```
+
 ## Exercise 7.35
 > Type과 initVal을 사용하는 곳에서 각각 어떤 정의를 사용하는지 나타내고 다음 코드를 설명한다. 또한 오류를 어떻게 수정할 수 있을지 설명한다.
+```cpp
+typedef string Type;
+Type initVal(); /* string */
+class Exercise {
+	public:
+		typedef double Type;
+		Type setVal(Type); /* double */
+		Type initVal(); /* double */
+	private:
+		int val;
+};
+Type Exercise::setVal(Type parm) { // 처음에는 string, 두 번째는 double
+	val = parm + initVal(); // Exercise::initVal()
+	return val;
+}
+```
+
+Type Exercise를 Exercise::Type Exercise로 고친다.
+
 ## Exercise 7.36
 > 다음 초기화식은 오류이다. 문제를 찾고 고친다.
 ```cpp
@@ -171,6 +265,9 @@ struct X {
 	int rem, base;
 };
 ```
+
+rem(base % j)를 rem(i % j)로 고친다.
+
 ## Exercise 7.37
 > 이 절에 있는 Sales_data 버전을 사용해 다음 각 변수를 초기화하는 데 어느 생성자를 사용하는지 결정하고 각 객체의 데이터 멤버 값을 나열한다.
 ```cpp
@@ -178,15 +275,27 @@ Sales_data first_item(cin);
 
 int main()
 {
-	Sales_data next;
-	Sales_data last("9-999-99999-9");
+	Sales_data next; 
+	Sales_data last("9-999-99999-9"); 
 }
 ```
+
+첫 번째 Sales_data(std::istream &is) 사용
+두 번째 Sales_data(std::string s = "") 사용, bookNo = "", cnt = 0, revenue = 0.0
+세 번째 Sales_data(std::string s = "") 사용, bookNo = "9-999-99999-9", cnt = 0, revenue = 0.0 
+
 ## Exercise 7.38
 > istream&를 취하는 생성자에 cin을 기본 인자로 지정하길 바랄 수도 있다. cin을 기본 인자로 사용하는 생성자 선언을 만든다.
 
+```cpp
+Sales_data(std::istream &is = std::cin) { read(is, *this); }
+```
+
 ## Exercise 7.39
 > string을 취하는 생성자와 istream&를 취하는 것 둘 모두 기본 인자를 지정하는 것이 적법한지 설명한다. 아니라면 왜 그런지 설명한다.
+
+위법. Sales_data() 생성자 호출을 모호?하게 만든다.
+
 ## Exercise 7.40
 > 다음 추상 객체 중 하나를 선택한다. (또는 직접 만든다.) 그 클래스에서 필요한 데이터 멤버가 무엇인지 결정하고 적절한 생성자 집합을 추가한다. 결정한 내용에 대해 설명한다.
 
@@ -196,6 +305,31 @@ int main()
 - (d) Vehicle
 - (e) Object
 - (f) Tree
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Book 
+{
+public:
+    Book(unsigned isbn, std::string const& name, std::string const& author, std::string const& pubdate)
+        :isbn_(isbn), name_(name), author_(author), pubdate_(pubdate)
+    { }
+
+    explicit Book(std::istream &in) 
+    { 
+        in >> isbn_ >> name_ >> author_ >> pubdate_;
+    }
+
+private:
+    unsigned isbn_;
+    std::string name_;
+    std::string author_;
+    std::string pubdate_;
+};
+```
+
 ## Exercise 7.41
 > 직접 만든 Sales_data 클래스에서 위임 생정자를 사용하도록 다시 만든다. 각 생성자 본체에 문장을 추가해 실행할 때마다 메시지를 출력하도록 한다. 가능한 모든 방법으로 Sales_data 객체를 생성하도록 여러 선언을 만든다. 위임 생성자 사이에 실행 순서를 확실히 이해할 때까지 출력 내용을 학습한다.
 ## Exercise 7.42
@@ -266,4 +400,3 @@ class Example {
 #include "example.h"
 double Example::rate;
 vector<double> Example::vec;
-```
