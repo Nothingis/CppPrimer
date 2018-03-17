@@ -332,26 +332,85 @@ private:
 
 ## Exercise 7.41
 > 직접 만든 Sales_data 클래스에서 위임 생정자를 사용하도록 다시 만든다. 각 생성자 본체에 문장을 추가해 실행할 때마다 메시지를 출력하도록 한다. 가능한 모든 방법으로 Sales_data 객체를 생성하도록 여러 선언을 만든다. 위임 생성자 사이에 실행 순서를 확실히 이해할 때까지 출력 내용을 학습한다.
+
+[ex7_41.h](ex7_41.h)
+
+[ex7_41.cpp](ex7_41.cpp)
+
 ## Exercise 7.42
 > 7.5.1절 연습문제 7.40에서 만든 클래스에 대해 어느 생성자에서 위임을 사용할 수 있을지 결정한다. 사용할 수 있으면 클래스에 위임 생성자를 만들고 그렇지 않다면 추상 객체 목록에서 위임 생성자를 사용할 수 있을 것으로 생각하는 것을 선택한다. 해당 추상 객체에 대한 클래스 정의를 만든다.
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Book 
+{
+public:
+    Book(unsigned isbn, std::string const& name, std::string const& author, std::string const& pubdate)
+        :isbn_(isbn), name_(name), author_(author), pubdate_(pubdate)
+    { }
+
+    explicit Book(std::istream &in) 
+    { 
+        in >> isbn_ >> name_ >> author_ >> pubdate_;
+    }
+
+private:
+    unsigned isbn_;
+    std::string name_;
+    std::string author_;
+    std::string pubdate_;
+};
+```
+
 ## Exercise 7.43
 > int를 취하는 생성자는 있지만 기본 생성자는 없는 NoDefault 클래스가 있다고 하자. NoDefault 타입인 멤버가 있는 클래스 C를 정의하고 C에 대한 기본 생성자를 정의한다.
+
+코드는 [여기](ex7_43.cpp)
+
+
 ## Exercise 7.44
 > 다음 선언이 옳은지 설명한다. 옳지 않다면 왜 그런지 설명한다.
 ```cpp
 vector<Nodefault> vec(10);
 ```
+
+옳지 않다. 각각은 default로 초기화 되어야 하지만 임시 객체를 위한 default 초기화는 없다.
+
 ## Exercise 7.45
 > 앞 연습문제의 vector에서 C 타입 객체를 담도록 정의하면 어떻게 될지 설명한다.
+
+C는 기본 생성자가 있기 때문에 문제되지 않는다.
+
 ## Exercise 7.46
 > 다음 문장 중 거짓이 있다면 어느 것인지, 왜 그런지 설명한다.
 
 - (a) 클래스에서는 반드시 적어도 생성자 하나는 있어야 한다.
+
+거짓. 기본 생성자가 있다.
+
 - (b) 기본 생성자는 매개변수 목록이 비어 있는 생성자이다.
+
+거짓. 기본 생성자는 초기화가 지원되지 않는 생성자이다.
+
 - (c) 클래스에 대한 의미 있는 기본 값이 없으면 해당 클래스에는 기본 생성자가 없어야 한다.
+
+거짓. 클래스는 기본 생성자가 있어야 한다.
+
 - (d) 클래스에서 기본 생성자를 정의하지 않으면 컴파일러에서 각 데이터 멤버와 연관된 타입의 기본 값으로 해당 멤버를 초기화하는 생성자를 만든다.
+
+거짓(?). 기본 생성자는 클래스에 어떠한 생성자도 없을 때 만들어 진다.
+
 ## Exercise 7.47
 > string을 취하는 Sales_data 생성자가 explicit여야 하는지 설명한다. 이 생성자를 explicit로 할 때 장단점은 무엇일지 설명한다.
+
+### 장점
+- * 암시적 변환이 필요한 생성자를 사용하지 못 하도록 막는다.
+- * 직접 초기화하는 형식의 생성자를 정의할 수 있다.
+
+### 단점
+- * 하나의 인자를 가진 생성자가 호출될 때만 의미 있다.
 
 ## Exercise 7.48
 > Sales_data 생성자가 explicit가 아니라면 다음 정의에서 어떤 일이 생길지 설명한다.
@@ -360,32 +419,85 @@ string null_isbn("9-999-99999-9");
 Sales_data item1(null_isbn);
 Sales_data item2("9-999-99999-9");
 ```
+
+아무 일도 생기지 않는다.
+
 > Sales_data 생성자가 explicit라면 어떻게 될지 설명한다.
+
+아무 일도 생기지 않는다.
+
 ## Exercise 7.49
 > 다음 세 가지 combine 선언 각각에 대해, i는 Sales_data이고 s는 string일 때 i.combine(s)를 호출하면 어떻게 될지 설명한다.
 
 - (a) Sales_data &combine(Sales_data);
+
+적합.
+
 - (b) Sales_data &combine(Sales_data&);
+
+오류
+
 - (c) Sales_data &combine(const Sales_data&) const;
+
+부적절. 마지막 const가 데이터 멤버에 대한 변형을 막기 때문에 const가 있을 수 없다.
+
 ## Exercise 7.50
 > Person 클래스 생성자 중 어느 것을 explicit로 지정해야 하는지 결정한다
+
+```cpp
+explicit Person(std::istream &is) { read(is, *this); }
+```
+
 ## Exercise 7.51
 > vector에서는 단일 인자 생성자를 explicit로 정의하지만 string에서는 그렇게 하지 않은 이유가 무엇일지 설명한다.
+
+vector는 생성자를 불렀을 때 그 형태가 매우 혼동된다.
+
+ex> Person(30);
+
+
+하지만 string은 매우 자연스럽다
+
+ex> Person("jh");
+
+###TODO
 ## Exercise 7.52
 > 2.6.1절에 있는 Sales_data의 첫 버전을 사용해 다음 초기화를 설명한다. 문제가 있으면 찾아 수정한다.
 ```cpp
 Sales_data item = {"978-0590353403", 25, 15.99};
 ```
+
 ## Exercise 7.53
 > Debug를 직접 정의한다.
+
+코드는 [여기](ex7_53.h)
+
 ## Exercise 7.54
-> Debug에서 set_으로 시작하는 멤버를 constexpt로 선언해야 할지 설명한다. 만약 아니라면 왜 그런지 설명한다.
+> Debug에서 set_으로 시작하는 멤버를 constexpr로 선언해야 할지 설명한다. 만약 아니라면 왜 그런지 설명한다.
+
+set_으로 시작하는 멤버는 데이터를 수정하는 함수지만 constexpr로 선언하면 데이터를 수정할 수 없다.
+
 ## Exercise 7.55
 > 7.5.5절에 있는 Data 클래스는 상수 클래스인가? 맞다면 그 이유를, 아니라면 아닌 이유를 설명한다.
+
+아니다.
+
+std::string은 리터럴 타입이 아니다.
+
 ## Exercise 7.56
 > static 클래스 멤버가 무엇이고 장단점은 무엇인지, 보통의 멤버와 어떻게 다른지 설명한다.
+
+static 클래스 멤버는 각각이 고유한 객체가 아니라 클래스 자체와 연관된 멤버이다.
+
+클래스에 대한 모든 객체가 하나의 공통된 데이터를 가지는 장점이자 단점이 있다.
+
+static 멤버는 불완전한 타입을 가질 수 있다.
+
 ## Exercise 7.57
 > Account 클래스를 직접 만든다.
+
+코드는 [여기](ex7_57.h)
+
 ## Exercise 7.58
 > 다음 static 데이터 멤버 선언과 정의 중 오류가 있다면 어느 것인지 찾고 이유를 설명한다.
 ```cpp
@@ -400,3 +512,30 @@ class Example {
 #include "example.h"
 double Example::rate;
 vector<double> Example::vec;
+```
+다음과 같은 오류가 발생한다.
+```cpp
+static double rate = 6.5;
+                ^
+            rate should be a constant expression.
+
+static vector<double> vec(vecSize);
+                            ^
+            we may not specify an in-class initializer inside parentheses.
+```
+
+다음과 같이 고친다.
+```cpp
+// example.h
+class Example {
+public:
+    static constexpr double rate = 6.5;
+    static const int vecSize = 20;
+    static vector<double> vec;
+};
+
+// example.C
+#include "example.h"
+constexpr double Example::rate;
+vector<double> Example::vec(Example::vecSize);
+```
