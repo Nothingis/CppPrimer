@@ -4,15 +4,15 @@
 #include <string>
 
 class Person {
-  std::string name;
-  std::string address;
  public:
-  auto get_name() const -> std::string const& {
-    return name;
+  std::string const& get_name() const {
+    return name_;
   }
-  auto get_addr() const -> std::string const& {
-    return address;
+  std::string const& get_addr() const {
+    return address_;
   }
+  std::string name_;
+  std::string address_;
 };
 
 #endif  // CHAPTER07_EX7_05_H_

@@ -3,7 +3,7 @@
 ## Exercise 7.1
 > 1.6절에 있는 거래 내용 처리 프로그램을 2.6.1절 연습문제에서 정의한 Sales_data 클래스를 사용해 만든다.
 
-코드는 [여기](ex7_01.cpp)
+코드는 [여기](ex7_01.cc)
 
 ## Exercise 7.2
 > 2.6.2절 연습문제에서 만든 Sales_data 클래스에 combine과 isbn 멤버를 추가한다.
@@ -13,7 +13,7 @@
 ## Exercise 7.3
 > 7.1.1절에서 본 거래 내용 처리 프로그램에서 이 멤버를 사용하도록 고친다.
 
-코드는 [여기](ex7_03.cpp)
+코드는 [여기](ex7_03.cc)
 
 ## Exercise 7.4
 > 개인의 이름과 주소를 나타내는 Person 객체를 만들고 각 요소는 string을 사용해 담는다. 이후 연습문제에서는 이 클래스에 기능을 차례로 정차 추가한다.
@@ -33,7 +33,7 @@
 ## Exercise 7.7
 > 7.1.2절 연습문제에서 만든 거래 내용 처리 프로그램을 고쳐 방금 만든 새로운 함수를 쓰도록 한다.
 
-코드는 [여기](ex7_07.cpp)
+코드는 [여기](ex7_07.cc)
 
 ## Exercise 7.8
 > Sales_data 매개변수를 read에서는 보통의 참조자로, print에서는 const에 대한 참조자로 정의한 이유를 설명한다.
@@ -51,14 +51,14 @@ read에서는 매개변수를 변경할 여지가 있지만, print에서는 변�
 if (read(read(cin, data1), data2))
 ```
 
-한 번에 Sales_data를 두 번 읽는다.
+두 번의 data를 입력 받아야 true이다.
 
 ## Exercise 7.11
 > 직접 만든 Sales_data 클래스에 생성자를 추가하고 각 생성자를 사용하는 프로그램을 만든다.
 
 [ex7_11.h](ex7_11.h)
 
-[ex7_11.cpp](ex7_11.cpp)
+[ex7_11.cc](ex7_11.cc)
 
 ## Exercise 7.12
 > istream을 취하는 Sales_data 생성자 정의를 Sales_data클래스 본체로 옮긴다.
@@ -68,7 +68,7 @@ if (read(read(cin, data1), data2))
 ## Exercise 7.13
 > 299쪽에 있는 프로그램을 다시 만들어 istream 생성자를 사용하도록 한다.
 
-코드는 [여기](ex7_13.cpp)
+코드는 [여기](ex7_13.cc)
 
 ## Exercise 7.14
 > 클래스 내 초기 값으로 지정한 값을 사용해 해당 멤버를 명시적으로 초기화하는 기본 생성자를 만든다.
@@ -85,7 +85,12 @@ Sales_data() : bookNo(""), units_sold(0), revenue(0){ }
 ## Exercise 7.16
 > 클래스 정의에서 접근 지정자를 쓸 수 있는 위치와 얼마나 많이 쓸 수 있는지에 대한 제약이 있다면 설명한다. public 지정자와 private 다음에는 어떤 멤버를 정의해야 하는지 각각 설명한다.
 
-클래스에서는 접근 지정자를 사용하지 않거나 하나 이산 사용할 수 있으며 얼마나 많이 쓸 수 있는지에 대한 제한도 없다. 각 접근 지정자에서는 다음에 오는 멤버에 대한 접근 수준을 지정한다. 접근 수준을 지정하면 다음 접근 지정자를 만나거나 클래스 본체를 빠져나갈 때까지 그대로 유지한다.
+클래스에서는 접근 지정자를 사용하지 않거나 하나 이상 사용할 수 있으며 얼마나 많이 쓸 수 있는지에 대한 제한도 없다. 각 접근 지정자에서는 다음에 오는 멤버에 대한 접근 수준을 지정한다. 접근 수준을 지정하면 다음 접근 지정자를 만나거나 클래스 본체를 빠져나갈 때까지 그대로 유지한다.
+
+
+public에는 해당 클래스 인터페이스를 정의하고,
+
+private는 구현에 속하는 데이터 멤버와 함수를 정의한다.
 
 ## Exercise 7.17
 > class나 struct를 사용하는 것에 차이가 있다면 무엇인지 설명한다.
@@ -143,20 +148,27 @@ private: name, address.
 > 직접 만든 Screen 클래스에 세 가지 생성자, 즉 기본 생성자, 높이와 폭에 대한 값을 취하고 지정한 수의 공백 문자로 내용을 초기화하는 생성자, 높이와 폭에 대한 값과 화면 내용으로 사용할 문자를 취하는 생성자를 추가한다.
 
 코드는 [여기](ex7_24.h)
-###TODO
 ## Exercise 7.25
 > Screen에서 복사와 대입에 대해 기본 버전에 의존해도 안전할지, 그렇지 않을지 이유와 함께 설명한다.
 
+책에서...
+
+
+"게다가 복사, 대입, 소멸에 대한 합성 버전은 vector나 string을 멤버로 하는 클래스에 대해서는 올바로 작동한다."
+
+
+따라서 기본 버전에 의존해도 안전하다.
 
 ## Exercise 7.26
 > Sales_data::avg_price를 inline 함수로 정의한다.
 
 [ex7_26.h](ex7_26.h)
 
-[ex7_26.cpp](ex7_26.cpp)
+[ex7_26.cc](ex7_26.cc)
 
 ## Exercise 7.27
 > 직접 만든 Screen에 move, set, display 연산을 추가하고 다음 코드를 실행해 클래스를 시험한다.
+
 ```cpp
 Screen myScreen(5, 5, 'X');
 myScreen.move(4, 0).set('#').display(cout);
@@ -170,7 +182,9 @@ cout << "\n";
 ## Exercise 7.28
 > move, set, display에서 Screen& 대신 Screen을 반환하면 앞 연습문제에서 어떤 일이 생길지 설명한다.
 
-set이 일시적인 복사 값을 변경하기 때문에 display를 적절하게 할 수 없다.
+set이 일시적인 복사 값을 변경하기 때문에 객체가 set의 결과를 가지고 있지 않다. 
+
+따라서, 두 번째 display는 다르게 출력된다.
 
 ## Exercise 7.29
 > 직접 만든 Screen을 고쳐 move, set, display 함수에서 Screen을 반환하도록 하고 앞 연습문제에서 한 예상이 맞는지 확인한다.
@@ -335,39 +349,37 @@ private:
 
 [ex7_41.h](ex7_41.h)
 
-[ex7_41.cpp](ex7_41.cpp)
+[ex7_41.cc](ex7_41.cc)
 
 ## Exercise 7.42
 > 7.5.1절 연습문제 7.40에서 만든 클래스에 대해 어느 생성자에서 위임을 사용할 수 있을지 결정한다. 사용할 수 있으면 클래스에 위임 생성자를 만들고 그렇지 않다면 추상 객체 목록에서 위임 생성자를 사용할 수 있을 것으로 생각하는 것을 선택한다. 해당 추상 객체에 대한 클래스 정의를 만든다.
 
 ```cpp
-#include <iostream>
-#include <string>
+class Book {
+ public:
+  Book(unsigned isbn, std::string const& name,
+      std::string const& author, std::string const& pubdate)
+      :isbn_(isbn), name_(name), author_(author), pubdate_(pubdate) {}
 
-class Book 
-{
-public:
-    Book(unsigned isbn, std::string const& name, std::string const& author, std::string const& pubdate)
-        :isbn_(isbn), name_(name), author_(author), pubdate_(pubdate)
-    { }
+  Book(std::string const &name, std::string const &author,
+      std::string const &pubdate) : Book(0, name, author, pubdate) {}
 
-    explicit Book(std::istream &in) 
-    { 
+    explicit Book(std::istream &in) {
         in >> isbn_ >> name_ >> author_ >> pubdate_;
     }
 
-private:
-    unsigned isbn_;
-    std::string name_;
-    std::string author_;
-    std::string pubdate_;
+ private:
+  unsigned isbn_;
+  std::string name_;
+  std::string author_;
+  std::string pubdate_;
 };
 ```
 
 ## Exercise 7.43
 > int를 취하는 생성자는 있지만 기본 생성자는 없는 NoDefault 클래스가 있다고 하자. NoDefault 타입인 멤버가 있는 클래스 C를 정의하고 C에 대한 기본 생성자를 정의한다.
 
-코드는 [여기](ex7_43.cpp)
+코드는 [여기](ex7_43.cc)
 
 
 ## Exercise 7.44
@@ -376,7 +388,7 @@ private:
 vector<Nodefault> vec(10);
 ```
 
-옳지 않다. 각각은 default로 초기화 되어야 하지만 임시 객체를 위한 default 초기화는 없다.
+옳지 않다. 각각은 default로 초기화 되어야 하지만 NoDefault는 default 생성자가 없다.
 
 ## Exercise 7.45
 > 앞 연습문제의 vector에서 C 타입 객체를 담도록 정의하면 어떻게 될지 설명한다.
@@ -388,11 +400,11 @@ C는 기본 생성자가 있기 때문에 문제되지 않는다.
 
 - (a) 클래스에서는 반드시 적어도 생성자 하나는 있어야 한다.
 
-거짓. 기본 생성자가 있다.
+거짓. 기본 생성자가 자동으로 생긴다.
 
 - (b) 기본 생성자는 매개변수 목록이 비어 있는 생성자이다.
 
-거짓. 기본 생성자는 초기화가 지원되지 않는 생성자이다.
+거짓. 기본 생성자는 초기화 식 없이 호출되는 생성자이다. 기본 인자를 사용해 매겨변수 목록이 있어도 기본 생성자가 될 수 있다.
 
 - (c) 클래스에 대한 의미 있는 기본 값이 없으면 해당 클래스에는 기본 생성자가 없어야 한다.
 
@@ -400,7 +412,7 @@ C는 기본 생성자가 있기 때문에 문제되지 않는다.
 
 - (d) 클래스에서 기본 생성자를 정의하지 않으면 컴파일러에서 각 데이터 멤버와 연관된 타입의 기본 값으로 해당 멤버를 초기화하는 생성자를 만든다.
 
-거짓(?). 기본 생성자는 클래스에 어떠한 생성자도 없을 때 만들어 진다.
+거짓. 기본 생성자는 클래스에 어떠한 생성자도 없을 때 만들어 진다.
 
 ## Exercise 7.47
 > string을 취하는 Sales_data 생성자가 explicit여야 하는지 설명한다. 이 생성자를 explicit로 할 때 장단점은 무엇일지 설명한다.
@@ -419,12 +431,9 @@ string null_isbn("9-999-99999-9");
 Sales_data item1(null_isbn);
 Sales_data item2("9-999-99999-9");
 ```
-
-아무 일도 생기지 않는다.
-
 > Sales_data 생성자가 explicit라면 어떻게 될지 설명한다.
 
-아무 일도 생기지 않는다.
+Sales_data에 대해 생성자를 모두 정의했으므로 내부적으로 같은 동작이다.
 
 ## Exercise 7.49
 > 다음 세 가지 combine 선언 각각에 대해, i는 Sales_data이고 s는 string일 때 i.combine(s)를 호출하면 어떻게 될지 설명한다.
@@ -435,7 +444,7 @@ Sales_data item2("9-999-99999-9");
 
 - (b) Sales_data &combine(Sales_data&);
 
-오류
+오류. s에 대한 임시 객체를 non-const 인자로 줄 수 없다.
 
 - (c) Sales_data &combine(const Sales_data&) const;
 
@@ -460,11 +469,20 @@ ex> Person(30);
 
 ex> Person("jh");
 
-###TODO
 ## Exercise 7.52
 > 2.6.1절에 있는 Sales_data의 첫 버전을 사용해 다음 초기화를 설명한다. 문제가 있으면 찾아 수정한다.
 ```cpp
 Sales_data item = {"978-0590353403", 25, 15.99};
+```
+
+클래스내 초기 값이 없어야 한다.
+
+```cpp
+ struct Sales_data {
+    std::string bookNo;
+    unsigned units_sold;
+    double revenue;
+};
 ```
 
 ## Exercise 7.53
@@ -500,6 +518,7 @@ static 멤버는 불완전한 타입을 가질 수 있다.
 
 ## Exercise 7.58
 > 다음 static 데이터 멤버 선언과 정의 중 오류가 있다면 어느 것인지 찾고 이유를 설명한다.
+
 ```cpp
 // example.h
 class Example {
@@ -513,7 +532,12 @@ class Example {
 double Example::rate;
 vector<double> Example::vec;
 ```
+
 다음과 같은 오류가 발생한다.
+
+(일반적으로 클래스 static 멤버는 클래스 본체 안에서 초기화할 수 없다. 하지만 const 정수 타입인 static 멤버에는 클래스 내 초기 값을 지정할 수 있으며~)
+
+
 ```cpp
 static double rate = 6.5;
                 ^
@@ -525,6 +549,7 @@ static vector<double> vec(vecSize);
 ```
 
 다음과 같이 고친다.
+
 ```cpp
 // example.h
 class Example {

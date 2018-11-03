@@ -30,7 +30,7 @@ class Sales_data {
   Sales_data& combine(const Sales_data&);
 
  private:
-  inline double avg_price() const;
+  double avg_price() const;
 
  private:
   std::string bookNo;
@@ -38,8 +38,7 @@ class Sales_data {
   double revenue = 0.0;
 };
 
-inline
-double Sales_data::avg_price() const {
+inline double Sales_data::avg_price() const {
   return units_sold ? revenue / units_sold : 0;
 }
 

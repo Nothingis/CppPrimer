@@ -2,15 +2,12 @@
 
 class NoDefault {
  public:
-  NoDefault(int i) {
-  }
+  NoDefault(int i) {}
 };
 
 class C {
  public:
-  C()
-      : def(0) {
-  }  // define the constructor of C.
+  C() : def(0) {}  // define the constructor of C.
  private:
   NoDefault def;
 };

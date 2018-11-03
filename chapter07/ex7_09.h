@@ -6,22 +6,22 @@
 
 struct Person {
   std::string const& getName() const {
-    return name;
+    return name_;
   }
   std::string const& getAddress() const {
-    return address;
+    return address_;
   }
 
-  std::string name;
-  std::string address;
+  std::string name_;
+  std::string address_;
 };
 
 std::istream &read(std::istream &is, Person &person) {
-  return is >> person.name >> person.address;
+  return is >> person.name_ >> person.address_;
 }
 
 std::ostream &print(std::ostream &os, const Person &person) {
-  return os << person.name << " " << person.address;
+  return os << person.name_ << " " << person.address_;
 }
 
 #endif  // CHAPTER07_EX7_09_H_
