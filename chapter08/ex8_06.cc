@@ -4,10 +4,10 @@
 #include "../chapter07/ex7_26.h"
 
 int main(int argc, char **argv) {
-  std::ifstream ifs(argv[1]);
+  std::ifstream input(argv[1]);
 
   Sales_data total;
-  if (read(input, total) {
+  if (input) {
     Sales_data trans;
     while (read(input, trans)) {
       if (total.isbn() == trans.isbn()) {

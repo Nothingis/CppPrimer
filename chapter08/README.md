@@ -85,6 +85,9 @@ void Func(const std::string& file_name, std::vector<std::string>& v) {
 
 ## Exercise 8.12
 > PersonInfo에서 클래스 내 초기 값을 사용하지 않은 이유가 무엇인지 설명한다.
+
+런타임에 결정되는(사용자의 입력) 정보를 가지고 있어야 되므로.
+
 ## Exercise 8.13
 > 이 절에 있는 전화번호 프로그램을 다시 만들어 cin 대신 명명한 파일에서 읽도록 한다.
 
